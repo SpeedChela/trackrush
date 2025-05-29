@@ -2,83 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Moderador;
 use Illuminate\Http\Request;
 
 class ModeradorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $moderadores = Moderador::all();
+        return view('moderador.index', compact('moderadores'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('moderador.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        Moderador::create($request->all());
+        return redirect()->route('moderador.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $moderador = Moderador::findOrFail($id);
+        return view('moderador.show', compact('moderador'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $moderador = Moderador::findOrFail($id);
+        return view('moderador.edit', compact('moderador'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $moderador = Moderador::findOrFail($id);
+        $moderador->update($request->all());
+        return redirect()->route('moderador.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $moderador = Moderador::findOrFail($id);
+        $moderador->delete();
+        return redirect()->route('moderador.index');
     }
 }

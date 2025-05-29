@@ -2,83 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Asignar_ruta;
 use Illuminate\Http\Request;
 
 class AsignarRutaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $asignarRutas = Asignar_ruta::all();
+        return view('Asignar_ruta.index', compact('asignarRutas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('Asignar_ruta.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        Asignar_ruta::create($request->all());
+        return redirect()->route('Asignar_ruta.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $asignarRuta = Asignar_ruta::findOrFail($id);
+        return view('Asignar_ruta.read', compact('asignarRuta'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $asignarRuta = Asignar_ruta::findOrFail($id);
+        return view('Asignar_ruta.edit', compact('asignarRuta'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $asignarRuta = Asignar_ruta::findOrFail($id);
+        $asignarRuta->update($request->all());
+        return redirect()->route('Asignar_ruta.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $asignarRuta = Asignar_ruta::findOrFail($id);
+        $asignarRuta->delete();
+        return redirect()->route('Asignar_ruta.index');
     }
 }

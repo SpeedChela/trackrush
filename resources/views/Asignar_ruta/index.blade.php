@@ -6,9 +6,9 @@
     <article class="post">
       <header>
         <div class="title">
-          <h2>Listado de {{ $titulo }}</h2>
+          <h2>Listado de {</h2>
           <ul class="actions">
-            <li><a href="{{ route('asignar_ruta.create') }}" class="btn btn-primary btn-lg">Nuevo {{ $singular }}</a></li>
+            <li><a href="{{ route('asignar_ruta.create') }}" class="btn btn-primary btn-lg">Nuevo </a></li>
           </ul>
         </div>
       </header>
@@ -24,18 +24,18 @@
               </tr>
             </thead>
             <tbody>
-              @foreach($registros as $registro)
+              @foreach($asignarRutas as $registro)
                 <tr>
                   <td>{{ $registro->id }}</td>
                   <td>{{ $registro->id_driver }}</td>
                   <td>{{ $registro->id_historico }}</td>
                   <td>
-                    <a href="{{ route('asignar_ruta.read', $registro->id) }}" class="btn btn-info btn-sm">Detalle</a>
+                    <a href="{{ route('asignar_ruta.show', $registro->id) }}" class="btn btn-info btn-sm">Detalle</a>
                     <a href="{{ route('asignar_ruta.edit', $registro->id) }}" class="btn btn-warning btn-sm">Editar</a>
                     <form action="{{ route('asignar_ruta.destroy', $registro->id) }}" method="POST" style="display:inline-block;">
                       @csrf
                       @method('DELETE')
-                      <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar este {{ $singular }}?')">Eliminar</button>
+                      <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar este ?')">Eliminar</button>
                     </form>
                   </td>
                 </tr>

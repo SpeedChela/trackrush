@@ -2,83 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Historico;
 use Illuminate\Http\Request;
 
 class HistoricoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $historicos = Historico::all();
+        return view('historico.index', compact('historicos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('historico.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        Historico::create($request->all());
+        return redirect()->route('historico.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $historico = Historico::findOrFail($id);
+        return view('historico.show', compact('historico'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $historico = Historico::findOrFail($id);
+        return view('historico.edit', compact('historico'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $historico = Historico::findOrFail($id);
+        $historico->update($request->all());
+        return redirect()->route('historico.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $historico = Historico::findOrFail($id);
+        $historico->delete();
+        return redirect()->route('historico.index');
     }
 }

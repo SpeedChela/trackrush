@@ -5,23 +5,16 @@
     <h1>Crear Entidad</h1>
     <form action="{{ route('entidades.store') }}" method="POST">
         @csrf
-        <label for="id_pais">id_pais</label>
+        <label for="id_pais">País</label>
         <select name="id_pais" id="id_pais" required>
             <option value="">Seleccionar ...</option>
             @foreach($paises as $pais)
-                <option value="{{ $pais->id }}">{{ $pais->id }}</option>
+                <option value="{{ $pais->id }}">{{ $pais->nombre }}</option> <!-- Asegúrate de que 'nombre' sea un atributo válido -->
             @endforeach
         </select>
         <br><br>
-        <label for="nombre">nombre</label>
+        <label for="nombre">Nombre</label>
         <input type="text" name="nombre" id="nombre" required>
-        <br><br>
-        <label for="status">status</label>
-        <select name="status" id="status" required>
-            <option value="">Seleccionar ...</option>
-            <option value="1">Activo</option>
-            <option value="0">Baja</option>
-        </select>
         <br><br>
         <button type="submit">Guardar Entidad</button>
     </form>

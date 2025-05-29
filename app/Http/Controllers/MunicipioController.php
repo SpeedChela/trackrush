@@ -2,83 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Municipio;
 use Illuminate\Http\Request;
 
 class MunicipioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $municipios = Municipio::all();
+        return view('municipio.index', compact('municipios'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('municipio.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        Municipio::create($request->all());
+        return redirect()->route('municipio.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $municipio = Municipio::findOrFail($id);
+        return view('municipio.show', compact('municipio'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $municipio = Municipio::findOrFail($id);
+        return view('municipio.edit', compact('municipio'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $municipio = Municipio::findOrFail($id);
+        $municipio->update($request->all());
+        return redirect()->route('municipio.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $municipio = Municipio::findOrFail($id);
+        $municipio->delete();
+        return redirect()->route('municipio.index');
     }
 }

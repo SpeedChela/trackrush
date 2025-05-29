@@ -6,9 +6,9 @@
     <article class="post">
       <header>
         <div class="title">
-          <h2>Listado de {{ $titulo }}</h2>
+          <h2>Listado de Entidades</h2>
           <ul class="actions">
-            <li><a href="{{ route('entidades.create') }}" class="btn btn-primary btn-lg">Nuevo {{ $singular }}</a></li>
+            <li><a href="{{ route('entidades.create') }}" class="btn btn-primary btn-lg">Nuevo </a></li>
           </ul>
         </div>
       </header>
@@ -25,19 +25,19 @@
               </tr>
             </thead>
             <tbody>
-              @foreach($registros as $registro)
+              @foreach($entidades as $registro)
                 <tr>
                   <td>{{ $registro->id }}</td>
                   <td>{{ $registro->id_pais }}</td>
                   <td>{{ $registro->nombre }}</td>
                   <td>{{ $registro->status }}</td>
                   <td>
-                    <a href="{{ route('entidades.read', $registro->id) }}" class="btn btn-info btn-sm">Detalle</a>
+                    <a href="{{ route('entidades.show', $registro->id) }}" class="btn btn-info btn-sm">Detalle</a>
                     <a href="{{ route('entidades.edit', $registro->id) }}" class="btn btn-warning btn-sm">Editar</a>
                     <form action="{{ route('entidades.destroy', $registro->id) }}" method="POST" style="display:inline-block;">
                       @csrf
                       @method('DELETE')
-                      <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar este {{ $singular }}?')">Eliminar</button>
+                      <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar este ?')">Eliminar</button>
                     </form>
                   </td>
                 </tr>

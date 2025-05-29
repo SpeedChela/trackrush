@@ -9,46 +9,46 @@
             <a class="nav-link" href="{{ url('/') }}">Inicio <i class="icofont-rounded-down"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('Asignar_ruta') }}">Asignar Ruta <i class="icofont-rounded-down"></i></a>
+            <a class="nav-link" href="{{ url('asignar_ruta') }}">Asignar Ruta <i class="icofont-rounded-down"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('Bodegas') }}">Bodegas <i class="icofont-rounded-down"></i></a>
+            <a class="nav-link" href="{{ url('bodegas') }}">Bodegas <i class="icofont-rounded-down"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('Drivers') }}">Drivers <i class="icofont-rounded-down"></i></a>
+            <a class="nav-link" href="{{ url('drivers') }}">Drivers <i class="icofont-rounded-down"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('Entidades') }}">Entidades <i class="icofont-rounded-down"></i></a>
+            <a class="nav-link" href="{{ url('entidades') }}">Entidades <i class="icofont-rounded-down"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('Estatus') }}">Estatus <i class="icofont-rounded-down"></i></a>
+            <a class="nav-link" href="{{ url('estatus') }}">Estatus <i class="icofont-rounded-down"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('Historico') }}">Histórico <i class="icofont-rounded-down"></i></a>
+            <a class="nav-link" href="{{ url('historico') }}">Histórico <i class="icofont-rounded-down"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('Moderadores') }}">Moderadores <i class="icofont-rounded-down"></i></a>
+            <a class="nav-link" href="{{ url('moderadores') }}">Moderadores <i class="icofont-rounded-down"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('Municipios') }}">Municipios <i class="icofont-rounded-down"></i></a>
+            <a class="nav-link" href="{{ url('municipios') }}">Municipios <i class="icofont-rounded-down"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('Paises') }}">Países <i class="icofont-rounded-down"></i></a>
+            <a class="nav-link" href="{{ url('paises') }}">Países <i class="icofont-rounded-down"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('Paquetes') }}">Paquetes <i class="icofont-rounded-down"></i></a>
+            <a class="nav-link" href="{{ url('paquetes') }}">Paquetes <i class="icofont-rounded-down"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('Roles') }}">Roles <i class="icofont-rounded-down"></i></a>
+            <a class="nav-link" href="{{ url('roles') }}">Roles <i class="icofont-rounded-down"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('Rutas') }}">Rutas <i class="icofont-rounded-down"></i></a>
+            <a class="nav-link" href="{{ url('rutas') }}">Rutas <i class="icofont-rounded-down"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('Usuarios') }}">Usuarios <i class="icofont-rounded-down"></i></a>
+            <a class="nav-link" href="{{ url('usuarios') }}">Usuarios <i class="icofont-rounded-down"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('Vehiculos') }}">Vehículos <i class="icofont-rounded-down"></i></a>
+            <a class="nav-link" href="{{ url('vehiculos') }}">Vehículos <i class="icofont-rounded-down"></i></a>
         </li>
     </ul>
 </div>
