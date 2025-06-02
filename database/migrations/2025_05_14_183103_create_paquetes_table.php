@@ -15,11 +15,16 @@ return new class extends Migration
     {
         Schema::create('paquetes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_bodega')->constrained('bodegas');
-            $table->string('guia', 50)->unique();
+            $table->string('codigo', 50)->unique();
             $table->decimal('peso', 10, 2);
-            $table->string('estado', 50);
+            $table->string('dimensiones', 100);
+            $table->text('descripcion');
+            $table->foreignId('estatus_id')->constrained('estatus');
+            $table->foreignId('ruta_id')->nullable()->constrained('rutas');
+            $table->foreignId('bodega_origen_id')->constrained('bodegas');
+            $table->foreignId('bodega_destino_id')->constrained('bodegas');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

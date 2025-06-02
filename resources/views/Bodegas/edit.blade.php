@@ -2,30 +2,102 @@
 
 @section('contenido')
 <div class="container">
-    <h1>Editar Bodega</h1>
-    <form action="{{ route('bodegas.update', $bodega->id) }}" method="POST">
-        @csrf
-        @method('PATCH')
-        <label for="id_empresa">id_empresa</label>
-        <select name="id_empresa" id="id_empresa" required>
-            <option value="">Seleccionar ...</option>
-            @foreach($empresas as $empresa)
-                <option value="{{ $empresa->id }}" @if(old('id_empresa', $bodega->id_empresa) == $empresa->id) selected @endif>{{ $empresa->id }}</option>
-            @endforeach
-        </select>
-        <br><br>
-        <label for="ubicación">ubicación</label>
-        <input type="text" name="ubicación" id="ubicación" value="{{ old('ubicación', $bodega->ubicación) }}" required>
-        <br><br>
-        <label for="latitud">latitud</label>
-        <input type="text" name="latitud" id="latitud" value="{{ old('latitud', $bodega->latitud) }}" required>
-        <br><br>
-        <label for="longitud">longitud</label>
-        <input type="text" name="longitud" id="longitud" value="{{ old('longitud', $bodega->longitud) }}" required>
-        <br><br>
-        <button type="submit">Actualizar Bodega</button>
-    </form>
-    <br>
-    <a href="{{ route('bodegas.index') }}" class="btn btn-secondary">Regresar</a>
+    <div class="card">
+        <div class="card-header">
+            <h2>Editar Bodega</h2>
+        </div>
+        <div class="card-body">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('bodegas.update', $bodega->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+                
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control @error('nombre') is-invalid @enderror" 
+                           name="nombre" id="nombre" value="{{ old('nombre', $bodega->nombre) }}" required>
+                    @error('nombre')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" class="form-control @error('direccion') is-invalid @enderror" 
+                           name="direccion" id="direccion" value="{{ old('direccion', $bodega->direccion) }}" required>
+                    @error('direccion')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" class="form-control @error('telefono') is-invalid @enderror" 
+                           name="telefono" id="telefono" value="{{ old('telefono', $bodega->telefono) }}" 
+                           pattern="[0-9]{10}" title="Ingrese un número de teléfono válido de 10 dígitos" required>
+                    @error('telefono')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" 
+                           name="email" id="email" value="{{ old('email', $bodega->email) }}" required>
+                    @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="municipio_id">Municipio</label>
+                    <select class="form-control @error('municipio_id') is-invalid @enderror" 
+                            name="municipio_id" id="municipio_id" required>
+                        <option value="">Seleccionar municipio...</option>
+                        @foreach($municipios as $municipio)
+                            <option value="{{ $municipio->id }}" 
+                                {{ old('municipio_id', $bodega->municipio_id) == $municipio->id ? 'selected' : '' }}>
+                                {{ $municipio->nombre }}, {{ $municipio->entidad->nombre }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('municipio_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="estatus_id">Estado</label>
+                    <select class="form-control @error('estatus_id') is-invalid @enderror" 
+                            name="estatus_id" id="estatus_id" required>
+                        <option value="">Seleccionar estado...</option>
+                        @foreach($estatus as $estado)
+                            <option value="{{ $estado->id }}" 
+                                {{ old('estatus_id', $bodega->estatus_id) == $estado->id ? 'selected' : '' }}>
+                                {{ $estado->nombre }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('estatus_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group mt-4">
+                    <button type="submit" class="btn btn-primary">Actualizar Bodega</button>
+                    <a href="{{ route('bodegas.index') }}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 @endsection

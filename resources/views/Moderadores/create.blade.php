@@ -1,7 +1,73 @@
-<h1>Crear Moderadore</h1>
-<form action="/{str.lower(model)}" method="POST">
-    @csrf
-    <label>id_usuario:</label><input type="text" name="id_usuario" required><br><label>id_bodega:</label><input type="text" name="id_bodega" required><br>
-    <button type="submit">Guardar</button>
-</form>
-<a href="/{str.lower(model)}">Volver al listado</a>
+@extends('template.master')
+
+@section('contenido')
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2>Crear Nuevo Moderador</h2>
+        </div>
+        <div class="card-body">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('moderadores.store') }}" method="POST">
+                @csrf
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="id_usuario" class="form-label">Usuario</label>
+                            <select class="form-select @error('id_usuario') is-invalid @enderror" 
+                                    name="id_usuario" id="id_usuario" required>
+                                <option value="">Seleccionar usuario...</option>
+                                @foreach($usuarios as $usuario)
+                                    <option value="{{ $usuario->id }}" {{ old('id_usuario') == $usuario->id ? 'selected' : '' }}>
+                                        {{ $usuario->nombre }} {{ $usuario->apellido }} - {{ $usuario->email }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('id_usuario')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="id_bodega" class="form-label">Bodega</label>
+                            <select class="form-select @error('id_bodega') is-invalid @enderror" 
+                                    name="id_bodega" id="id_bodega" required>
+                                <option value="">Seleccionar bodega...</option>
+                                @foreach($bodegas as $bodega)
+                                    <option value="{{ $bodega->id }}" {{ old('id_bodega') == $bodega->id ? 'selected' : '' }}>
+                                        {{ $bodega->nombre }} - {{ $bodega->ubicacion }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('id_bodega')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mt-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Guardar Moderador
+                    </button>
+                    <a href="{{ route('moderadores.index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection

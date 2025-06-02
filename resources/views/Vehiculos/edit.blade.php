@@ -2,22 +2,95 @@
 
 @section('contenido')
 <div class="container">
-    <h1>Editar Vehículo</h1>
-    <form action="{{ route('vehiculos.update', $vehiculo->id) }}" method="POST">
-        @csrf
-        @method('PATCH')
-        <label for="placa">placa</label>
-        <input type="text" name="placa" id="placa" value="{{ old('placa', $vehiculo->placa) }}" required>
-        <br><br>
-        <label for="modelo">modelo</label>
-        <input type="text" name="modelo" id="modelo" value="{{ old('modelo', $vehiculo->modelo) }}" required>
-        <br><br>
-        <label for="marca">marca</label>
-        <input type="text" name="marca" id="marca" value="{{ old('marca', $vehiculo->marca) }}" required>
-        <br><br>
-        <button type="submit">Actualizar Vehículo</button>
-    </form>
-    <br>
-    <a href="{{ route('vehiculos.index') }}" class="btn btn-secondary">Regresar</a>
+    <div class="card">
+        <div class="card-header">
+            <h2>Editar Vehículo</h2>
+        </div>
+        <div class="card-body">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('vehiculos.update', $vehiculo->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+                
+                <div class="form-group">
+                    <label for="placa">Placa</label>
+                    <input type="text" class="form-control @error('placa') is-invalid @enderror" 
+                           name="placa" id="placa" value="{{ old('placa', $vehiculo->placa) }}" required>
+                    @error('placa')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="marca">Marca</label>
+                    <input type="text" class="form-control @error('marca') is-invalid @enderror" 
+                           name="marca" id="marca" value="{{ old('marca', $vehiculo->marca) }}" required>
+                    @error('marca')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="modelo">Modelo</label>
+                    <input type="text" class="form-control @error('modelo') is-invalid @enderror" 
+                           name="modelo" id="modelo" value="{{ old('modelo', $vehiculo->modelo) }}" required>
+                    @error('modelo')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="anio">Año</label>
+                    <input type="number" class="form-control @error('anio') is-invalid @enderror" 
+                           name="anio" id="anio" value="{{ old('anio', $vehiculo->anio) }}" 
+                           min="1900" max="{{ date('Y') + 1 }}" required>
+                    @error('anio')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="capacidad">Capacidad (kg)</label>
+                    <input type="number" class="form-control @error('capacidad') is-invalid @enderror" 
+                           name="capacidad" id="capacidad" value="{{ old('capacidad', $vehiculo->capacidad) }}" 
+                           min="0" step="0.01" required>
+                    @error('capacidad')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="estatus_id">Estado</label>
+                    <select class="form-control @error('estatus_id') is-invalid @enderror" 
+                            name="estatus_id" id="estatus_id" required>
+                        <option value="">Seleccionar estado...</option>
+                        @foreach($estatus as $estado)
+                            <option value="{{ $estado->id }}" 
+                                {{ old('estatus_id', $vehiculo->estatus_id) == $estado->id ? 'selected' : '' }}>
+                                {{ $estado->nombre }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('estatus_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group mt-4">
+                    <button type="submit" class="btn btn-primary">Actualizar Vehículo</button>
+                    <a href="{{ route('vehiculos.index') }}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 @endsection

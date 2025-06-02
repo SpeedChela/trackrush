@@ -2,31 +2,74 @@
 
 @section('contenido')
 <div class="container">
-    <h1>Editar Entidad</h1>
-    <form action="{{ route('entidades.update', $entidad->id) }}" method="POST">
-        @csrf
-        @method('PATCH')
-        <label for="id_pais">id_pais</label>
-        <select name="id_pais" id="id_pais" required>
-            <option value="">Seleccionar ...</option>
-            @foreach($paises as $pais)
-                <option value="{{ $pais->id }}" @if(old('id_pais', $entidad->id_pais) == $pais->id) selected @endif>{{ $pais->id }}</option>
-            @endforeach
-        </select>
-        <br><br>
-        <label for="nombre">nombre</label>
-        <input type="text" name="nombre" id="nombre" value="{{ old('nombre', $entidad->nombre) }}" required>
-        <br><br>
-        <label for="status">status</label>
-        <select name="status" id="status" required>
-            <option value="">Seleccionar ...</option>
-            <option value="1" @if(old('status', $entidad->status) == 1) selected @endif>Activo</option>
-            <option value="0" @if(old('status', $entidad->status) == 0) selected @endif>Baja</option>
-        </select>
-        <br><br>
-        <button type="submit">Actualizar Entidad</button>
-    </form>
-    <br>
-    <a href="{{ route('entidades.index') }}" class="btn btn-secondary">Regresar</a>
+    <div class="card">
+        <div class="card-header">
+            <h2>Editar Entidad</h2>
+        </div>
+        <div class="card-body">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('entidades.update', $entidad->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+                
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control @error('nombre') is-invalid @enderror" 
+                           name="nombre" id="nombre" value="{{ old('nombre', $entidad->nombre) }}" required>
+                    @error('nombre')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="id_pais">País</label>
+                    <select class="form-control @error('id_pais') is-invalid @enderror" 
+                            name="id_pais" id="id_pais" required>
+                        <option value="">Seleccionar país...</option>
+                        @foreach($paises as $pais)
+                            <option value="{{ $pais->id }}" 
+                                {{ old('id_pais', $entidad->id_pais) == $pais->id ? 'selected' : '' }}>
+                                {{ $pais->nombre }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('id_pais')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="status">Estado</label>
+                    <select class="form-control @error('status') is-invalid @enderror" 
+                            name="status" id="status" required>
+                        <option value="">Seleccionar estado...</option>
+                        <option value="1" {{ old('status', $entidad->status) == 1 ? 'selected' : '' }}>Activo</option>
+                        <option value="0" {{ old('status', $entidad->status) == 0 ? 'selected' : '' }}>Inactivo</option>
+                    </select>
+                    @error('status')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group mt-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Actualizar Entidad
+                    </button>
+                    <a href="{{ route('entidades.index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 @endsection

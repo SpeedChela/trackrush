@@ -8,7 +8,7 @@
         <label for="id_driver">id_driver</label>
         <select name="id_driver" id="id_driver" required>
             <option value="">Seleccionar ...</option>
-            @foreach($asignarRuta as $driver)
+            @foreach($drivers as $driver)
                 <option value="{{ $driver->id }}">{{ $driver->id }}</option>
             @endforeach
         </select>
@@ -16,7 +16,7 @@
         <label for="id_historico">id_historico</label>
         <select name="id_historico" id="id_historico" required>
             <option value="">Seleccionar ...</option>
-            @foreach($asignarRuta as $historico)
+            @foreach($historicos as $historico)
                 <option value="{{ $historico->id }}">{{ $historico->id }}</option>
             @endforeach
         </select>
